@@ -1,8 +1,8 @@
-#!/usr/bin/env node
+#!/usr/bin/node
 const {build} = require('vite');
 const {dirname} = require('path');
 
-/** @type 'production' | 'development' */
+/** @type 'production' | 'development' | 'test' */
 const mode = process.env.MODE = process.env.MODE || 'production';
 
 const packagesConfigs = [

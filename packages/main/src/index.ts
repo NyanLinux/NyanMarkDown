@@ -1,6 +1,6 @@
-import {app, BrowserWindow, shell} from 'electron';
-import {join} from 'path';
-import {URL} from 'url';
+import { app, BrowserWindow } from 'electron';
+import { join } from 'path';
+import { URL } from 'url';
 
 
 const isSingleInstance = app.requestSingleInstanceLock();
@@ -12,11 +12,18 @@ if (!isSingleInstance) {
 
 app.disableHardwareAcceleration();
 
+/**
+ * Workaround for TypeScript bug
+ * @see https://github.com/microsoft/TypeScript/issues/41468#issuecomment-727543400
+ */
+const env = import.meta.env;
+
+
 // Install "Vue.js devtools"
-if (import.meta.env.MODE === 'development') {
+if (env.MODE === 'development') {
   app.whenReady()
     .then(() => import('electron-devtools-installer'))
-    .then(({default: installExtension, VUEJS3_DEVTOOLS}) => installExtension(VUEJS3_DEVTOOLS, {
+    .then(({ default: installExtension, VUEJS3_DEVTOOLS }) => installExtension(VUEJS3_DEVTOOLS, {
       loadExtensionOptions: {
         allowFileAccess: true,
       },
@@ -29,9 +36,12 @@ let mainWindow: BrowserWindow | null = null;
 const createWindow = async () => {
   mainWindow = new BrowserWindow({
     show: false, // Use 'ready-to-show' event to show window
+    vibrancy: 'under-window',
+    visualEffectState: 'active',
     webPreferences: {
-      nativeWindowOpen: true,
       preload: join(__dirname, '../../preload/dist/index.cjs'),
+      contextIsolation: env.MODE !== 'test',   // Spectron tests can't work with contextIsolation: true
+      enableRemoteModule: env.MODE === 'test', // Spectron tests can't work with enableRemoteModule: false
     },
   });
 
@@ -42,21 +52,13 @@ const createWindow = async () => {
    * @see https://github.com/electron/electron/issues/25012
    */
   mainWindow.on('ready-to-show', () => {
-    mainWindow?.show();
+    if (!mainWindow?.isVisible()) {
+      mainWindow?.show();
+    }
 
-    if (import.meta.env.MODE === 'development') {
+    if (env.MODE === 'development') {
       mainWindow?.webContents.openDevTools();
     }
-  });
-
-  /**
-   * External hyperlinks open in the default browser.
-   *
-   * @see https://stackoverflow.com/a/67409223
-   */
-   mainWindow.webContents.setWindowOpenHandler(({ url }) => {
-    shell.openExternal(url);
-    return { action: 'deny' };
   });
 
   /**
@@ -64,8 +66,8 @@ const createWindow = async () => {
    * Vite dev server for development.
    * `file://../renderer/index.html` for production and test
    */
-  const pageUrl = import.meta.env.MODE === 'development' && import.meta.env.VITE_DEV_SERVER_URL !== undefined
-    ? import.meta.env.VITE_DEV_SERVER_URL
+  const pageUrl = env.MODE === 'development'
+    ? env.VITE_DEV_SERVER_URL
     : new URL('../renderer/dist/index.html', 'file://' + __dirname).toString();
 
 
@@ -95,10 +97,10 @@ app.whenReady()
 
 
 // Auto-updates
-if (import.meta.env.PROD) {
+if (env.PROD) {
   app.whenReady()
     .then(() => import('electron-updater'))
-    .then(({autoUpdater}) => autoUpdater.checkForUpdatesAndNotify())
+    .then(({ autoUpdater }) => autoUpdater.checkForUpdatesAndNotify())
     .catch((e) => console.error('Failed check updates:', e));
 }
 

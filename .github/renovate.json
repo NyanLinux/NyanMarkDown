@@ -2,8 +2,7 @@
   "extends": [
     "config:base",
     ":semanticCommits",
-    ":automergeTypes",
-    ":disableDependencyDashboard"
+    ":automergeTypes"
   ],
   "labels": [
     "dependencies"
@@ -49,10 +48,13 @@
     },
     {
       "matchPackageNames": [
-        "electron"
+        "electron",
+        "electron-releases",
+        "spectron"
       ],
-      "separateMajorMinor": false
+      "separateMajorMinor": false,
+      "groupName": "electron"
     }
   ],
-  "rangeStrategy": "pin"
+  "rangeStrategy": "bump"
 }
