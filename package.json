@@ -1,0 +1,54 @@
+{
+  "name": "electron-md-editor",
+  "private": true,
+  "engines": {
+    "node": ">=v16.13",
+    "npm": ">=8.1"
+  },
+  "main": "packages/main/dist/index.cjs",
+  "scripts": {
+    "build": "node scripts/build.js",
+    "precompile": "cross-env MODE=production npm run build",
+    "compile": "electron-builder build --config electron-builder.config.js --dir --config.asar=false",
+    "pretest": "npm run build",
+    "test": "node tests/app.spec.js",
+    "watch": "node scripts/watch.js",
+    "lint": "eslint . --ext js,ts,vue",
+    "typecheck-main": "tsc --noEmit -p packages/main/tsconfig.json",
+    "typecheck-preload": "tsc --noEmit -p packages/preload/tsconfig.json",
+    "typecheck-renderer": "vue-tsc --noEmit -p packages/renderer/tsconfig.json",
+    "typecheck": "npm run typecheck-main && npm run typecheck-preload && npm run typecheck-renderer"
+  },
+  "browserslist": [
+    "Chrome 96"
+  ],
+  "simple-git-hooks": {
+    "pre-commit": "npx lint-staged",
+    "pre-push": "npm run typecheck"
+  },
+  "lint-staged": {
+    "*.{js,ts,vue}": "eslint --cache --fix"
+  },
+  "devDependencies": {
+    "@types/electron-devtools-installer": "2.2.0",
+    "@typescript-eslint/eslint-plugin": "5.4.0",
+    "@vitejs/plugin-vue": "1.9.4",
+    "cross-env": "7.0.3",
+    "electron": "16.0.1",
+    "electron-builder": "22.14.5",
+    "electron-devtools-installer": "3.2.0",
+    "eslint": "8.2.0",
+    "eslint-plugin-vue": "8.1.1",
+    "lint-staged": "12.0.3",
+    "playwright": "1.16.3",
+    "simple-git-hooks": "2.7.0",
+    "typescript": "4.5.2",
+    "vite": "2.6.14",
+    "vue-tsc": "0.29.5"
+  },
+  "dependencies": {
+    "electron-updater": "4.6.2",
+    "vue": "3.2.22",
+    "vue-router": "4.0.12"
+  }
+}
