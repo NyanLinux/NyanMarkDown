@@ -2,10 +2,6 @@
   "name": "electron-md-editor",
   "private": true,
   "author": "Amane Misa",
-  "repository": {
-    "type": "git",
-    "url": "git@github.com:amane312/electron-md-editor.git"
-  },
   "keywords": [
     "Markdown",
     "remark",
