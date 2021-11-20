@@ -1,4 +1,6 @@
-# Markdown Editor Tutorial
+# Markdown Editor 
+
+* Version 1.0.0
 
 ## Stack
 
@@ -94,7 +96,7 @@ When running building, environment variables are loaded from the following files
 
 ## Author
 
-Takuya Matsuyama ([@craftzdog](https://github.com/craftzdog))
+Amane Misa  ([@amane312](https://github.com/amane312))
 
 
 [vite]: https://github.com/vitejs/vite/
