@@ -10,10 +10,6 @@
     "Vite",
     "typescript"
   ],
-  "engines": {
-    "node": ">=v16.13",
-    "npm": ">=8.1"
-  },
   "main": "packages/main/dist/index.cjs",
   "scripts": {
     "buildEnvTypes": "node scripts/buildEnvTypes.js",
