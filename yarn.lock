@@ -822,10 +822,9 @@
   dependencies:
     "@wdio/logger" "6.10.10"
 
-"@xmldom/xmldom@^0.7.5":
-  "integrity" "sha512-V3BIhmY36fXZ1OtVcI9W+FxQqxVLsPKcNjWigIaa81dLC9IolJl5Mt4Cvhmr0flUnjSpTdrbMTSbXqYqV5dT6A=="
-  "resolved" "https://registry.npmjs.org/@xmldom/xmldom/-/xmldom-0.7.5.tgz"
-  "version" "0.7.5"
+"@xmldom/xmldom@github:xmldom/xmldom":
+  "resolved" "git+ssh://git@github.com/xmldom/xmldom.git#dec787eb2b10d600dec23be9076ab9d335c121e7"
+  "version" "0.7.3"
 
 "7zip-bin@~5.1.1":
   "integrity" "sha512-sAP4LldeWNz0lNzmTird3uWfFDWWTeg6V/MsmyyLR9X1idwKBWIgt/ZvinqQldJm3LecKEs1emkbquO6PCiLVQ=="
