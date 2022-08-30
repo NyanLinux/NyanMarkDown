@@ -58,7 +58,7 @@
     "spectron": "^15.0.0",
     "typescript": "^4.3.5",
     "ansi-regex": ">=5.0.1",
-    "vite": "^2.4.4"
+    "vite": "^2.9.13"
   },
   "dependencies": {
     "@codemirror/commands": "^0.19.1",
