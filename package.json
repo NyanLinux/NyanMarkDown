@@ -1,5 +1,5 @@
 {
-  "name": "electron-mid-editor",
+  "name": "NyanMarkDown",
   "private": true,
   "keywords": [
     "Markdown",
@@ -9,7 +9,7 @@
     "Vite",
     "TypeScript"
   ],
-  "author": "Amane Misa",
+  "author": "Amane Maririn",
   "license": "MIT",
   "engines": {
     "node": ">=v14.16",
