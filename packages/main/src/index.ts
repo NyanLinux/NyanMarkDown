@@ -40,9 +40,9 @@ const createWindow = async () => {
     visualEffectState: 'active',
     webPreferences: {
       preload: join(__dirname, '../../preload/dist/index.cjs'),
-      contextIsolation: env.MODE !== 'test',   // Spectron tests can't work with contextIsolation: true
-      enableRemoteModule: env.MODE === 'test', // Spectron tests can't work with enableRemoteModule: false
-    },
+      // contextIsolation: env.MODE !== 'test',   // Spectron tests can't work with contextIsolation: true
+      // enableRemoteModule: env.MODE === 'production' // Spectron tests can't work with enableRemoteModule: false
+    }
   });
 
   /**
