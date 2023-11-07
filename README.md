@@ -96,7 +96,7 @@ When running building, environment variables are loaded from the following files
 
 ## Author
 
-Amane Misa  ([@amane312](https://github.com/amane312))
+Amane Maririn  ([@maririn312](https://github.com/marin312))
 
 
 [vite]: https://github.com/vitejs/vite/
